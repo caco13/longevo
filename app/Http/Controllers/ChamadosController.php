@@ -13,13 +13,11 @@ class ChamadosController extends Controller
     {
         $chamados = Chamado::latest('updated_at')->get();
 
-        return 'Lista dos chamados';
-
-//        return view('chamados.index', compact('chamados'));
+        return view('chamados.index', compact('chamados'));
     }
 
     public function show(Chamado $chamado)
     {
-
+        return $chamado;
     }
 }
