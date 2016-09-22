@@ -12,7 +12,7 @@ class CriaTabelaPedidos extends Migration
      */
     public function up()
     {
-        Schema::table('pedidos', function (Blueprint $table) {
+        Schema::create('pedidos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cliente_id')->unsigned();
             $table->timestamps();

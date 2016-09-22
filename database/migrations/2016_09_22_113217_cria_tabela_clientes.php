@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CriaTabelaChamados extends Migration
+class CriaTabelaClientes extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,11 @@ class CriaTabelaChamados extends Migration
      */
     public function up()
     {
-        Schema::table('chamados', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('pedido_id')->unsigned();
-            $table->string('titulo');
-            $table->text('observacao')->nullable();
-
-            $table->foreign('pedido_id')->references('id')->on('pedidos');
+            $table->string('nome');
+            $table->string('email')->unique();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +27,6 @@ class CriaTabelaChamados extends Migration
      */
     public function down()
     {
-        Schema::drop('chamados');
+        Schema::drop('clientes');
     }
 }
