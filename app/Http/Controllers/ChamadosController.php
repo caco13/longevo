@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Chamado;
+use App\Cliente;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -41,19 +43,26 @@ class ChamadosController extends Controller
      */
     public function filter(Request $request)
     {
-        $pedido = $request->get('pedido');
-        $email = $request->get('email');
-        $chamado = new Chamado;
+        $chamados = new Chamado;
 
-        if ( !is_null($pedido) ) {
-            $chamado = $chamado->where('pedido', $pedido->id);
+        if ($request->has('pedido')) {
+            $chamados = $chamados->where('pedido_id', $request->get('pedido'));
         }
-        if ( !is_null($email) ) {
-            $chamado = $chamado->where('email', $pedido->cliente->id);
+        if ($request->has('email')) {
+            $cliente = Cliente::where('email', $request->get('email'))->first();
+            if ( !is_null($cliente) ) {
+                $pedidos = $cliente->pedidos;
+                foreach ($pedidos as $pedido) {
+                    $chamados = $chamados->push($pedido->chamados);
+                }
+            }
         }
-        if (isEmpty($chamado)) {
+
+        $chamados = $chamados->get();
+
+        if ($chamados->isEmpty()) {
             //flash message
-            return redirect('chamados');
+            return redirect()->route('chamados');
         }
 
         return view('chamados.index', compact('chamados'));
