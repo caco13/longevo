@@ -69,4 +69,12 @@ class ChamadosController extends Controller
 
         return view('chamados.index', compact('chamados'));
     }
+
+    /**
+     * Apresenta o formulário para cadastro de novo chamado.
+     */
+    public function create()
+    {
+        return view('chamados.create');
+    }
 }
