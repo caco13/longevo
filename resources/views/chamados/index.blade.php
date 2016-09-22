@@ -27,4 +27,7 @@
             </tbody>
         </table>
     @endif
+
+    <a href="{{ url('chamados/create') }}" class="btn btn-primary">Novo Chamado</a>
+
 @endsection
