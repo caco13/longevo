@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+    @include('partials.filter')
     <h1>Chamados</h1>
 
     @if(isEmpty($chamados))
