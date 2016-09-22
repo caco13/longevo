@@ -4,7 +4,6 @@
     <h1>Chamados</h1>
     <hr>
     @include('partials.filter')
-    <hr>
 
     @if($chamados->isEmpty())
         <p>A lista de chamados está vazia.</p>

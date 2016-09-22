@@ -12,7 +12,7 @@
 
 <body>
 <div class="container">
-    @include('flash::message')
+    {{--@include('flash::message')--}}
     @yield('content')
 </div>
 <script src="https://code.jquery.com/jquery-3.1.0.js"
