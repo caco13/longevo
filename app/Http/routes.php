@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Route::get('chamados', ['as' => 'chamados', 'uses' => 'ChamadosController@index']);
 
+Route::post('chamados', ['as' => 'chamados', 'uses' => 'ChamadosController@filter']);
+
 Route::get('chamados/{chamados}', 'ChamadosController@show');
