@@ -31,7 +31,7 @@ class ChamadosController extends Controller
      */
     public function show(Chamado $chamado)
     {
-        return view('chamados.chamado', compact($chamado));
+        return view('chamados.chamado', compact('chamado'));
     }
 
     /**
@@ -43,25 +43,27 @@ class ChamadosController extends Controller
      */
     public function filter(Request $request)
     {
-        $chamados = new Chamado;
+        $chamados = new Collection;
 
+        //TODO: que feio, refatorar!
         if ($request->has('pedido')) {
-            $chamados = $chamados->where('pedido_id', $request->get('pedido'));
+            $chamados = Chamado::where('pedido_id', $request->get('pedido'))->get();
         }
         if ($request->has('email')) {
             $cliente = Cliente::where('email', $request->get('email'))->first();
             if ( !is_null($cliente) ) {
                 $pedidos = $cliente->pedidos;
                 foreach ($pedidos as $pedido) {
-                    $chamados = $chamados->push($pedido->chamados);
+                    foreach ($pedido->chamados as $chamado) {
+                        $chamados->push($chamado);
+                    }
                 }
             }
         }
 
-        $chamados = $chamados->get();
-
         if ($chamados->isEmpty()) {
-            //flash message
+            //TODO: flash message
+
             return redirect()->route('chamados');
         }
 
