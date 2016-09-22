@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
+    /**
+     * Campos para atribuição em massa
+     */
+    protected $fillable = [
+        'nome', 'email',
+    ];
+
     /** Relações com outros modelos **/
 
     /**

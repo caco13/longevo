@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
+    /**
+     * Campos para atribuição em massa
+     */
+    protected $fillable = [
+        'cliente_id',
+    ];
+
     /** Relações com outros modelos **/
 
     /**
