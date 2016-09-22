@@ -17,6 +17,8 @@ class CriaTabelaChamados extends Migration
             $table->integer('pedido_id')->unsigned();
             $table->string('titulo');
             $table->text('observacao')->nullable();
+
+            $table->foreign('pedido_id')->references('id')->on('pedidos');
         });
     }
 
