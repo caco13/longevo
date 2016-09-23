@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Chamado;
 use App\Cliente;
+use App\Pedido;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -72,9 +73,27 @@ class ChamadosController extends Controller
 
     /**
      * Apresenta o formulário para cadastro de novo chamado.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
         return view('chamados.create');
+    }
+
+    public function store(Request $request)
+    {
+        $pedido = $request->get('pedido');
+
+        $result = Pedido::first($pedido->id);
+
+        if( !$result ) {
+            //TODO: flash message
+
+            return redirect()->route('chamados_create');
+        }
+
+
+
     }
 }
