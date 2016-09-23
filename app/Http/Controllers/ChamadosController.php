@@ -46,23 +46,31 @@ class ChamadosController extends Controller
      */
     public function filter(Request $request)
     {
-        $chamados = new Collection;
+        $pedido = Pedido::find($request->get('pedido'));
+        $cliente = Cliente::where('email', $request->get('email'))->first();
 
-        //TODO: que feio, refatorar!
-        if ($request->has('pedido')) {
-            $chamados = Chamado::where('pedido_id', $request->get('pedido'))->paginate(5);
-        }
-        if ($request->has('email')) {
-            $cliente = Cliente::where('email', $request->get('email'))->first();
-            if ( !is_null($cliente) ) {
-                $pedidos = $cliente->pedidos;
-                foreach ($pedidos as $pedido) {
+        if (is_null($cliente)) {
+            if (is_null($pedido)) {
+                session()->flash('flash_message', 'Não foram encontrados chamados com os filtros especificados.');
+                return redirect()->route('chamados');
+            } else {
+                $chamados = Chamado::where('pedido_id', $pedido->id)->paginate(5);
+            }
+        } else {
+            $chamados = new Collection;
+            if (is_null($pedido)) {
+                // Se campo de filtro de pedido está vazio ou não foi encontrado pedido,
+                // retorna todos os chamados de todos os pedidos do cliente.
+                foreach ($cliente->pedidos as $pedido) {
                     foreach ($pedido->chamados as $chamado) {
                         $chamados->push($chamado);
                     }
                 }
+            } else {
+                // Se foi encontrado pedido retorna chamados
+                // referentes ao pedido do cliente.
+                $chamados = $cliente->pedidos->where('pedido_id', $pedido->id);
             }
-
             // Faz a paginação da Collection
             $chamados = new LengthAwarePaginator(
                 $chamados->slice(5),
@@ -71,15 +79,10 @@ class ChamadosController extends Controller
                 null,
                 ['path' => url('chamados')]
             );
-
-        }
-
-        if ($chamados->isEmpty()) {
-            session()->flash('flash_message', 'Não foram encontrados chamados com os filtros especificados.');
-            return redirect()->route('chamados');
         }
 
         return view('chamados.index', compact('chamados'));
+
     }
 
     /**
