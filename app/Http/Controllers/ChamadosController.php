@@ -54,7 +54,7 @@ class ChamadosController extends Controller
                 session()->flash('flash_message', 'Não foram encontrados chamados com os filtros especificados.');
                 return redirect()->route('chamados');
             } else {
-                $chamados = Chamado::where('pedido_id', $pedido->id)->paginate(5);
+                $chamados = Chamado::where('pedido_id', $pedido->id)->latest()->paginate(5);
             }
         } else {
             $chamados = new Collection;
@@ -66,19 +66,29 @@ class ChamadosController extends Controller
                         $chamados->push($chamado);
                     }
                 }
+                // Faz a paginação da Collection
+                $chamados = new LengthAwarePaginator(
+                    $chamados->slice(5),
+                    $chamados->count(),
+                    5,
+                    null,
+                    ['path' => url('chamados')]
+                );
+
+                session()->flash('flash_message', 'Retornando chamados do cliente ' . $cliente->email);
             } else {
-                // Se foi encontrado pedido retorna chamados
-                // referentes ao pedido do cliente.
-                $chamados = $cliente->pedidos->where('pedido_id', $pedido->id);
+                // Verifica se o cliente possui o pedido
+                $pedido = $cliente->pedidos->find($pedido->id);
+                if (is_null($pedido)) {
+                    session()->flash('flash_message', 'Não foram encontrados chamados com os filtros especificados.');
+                    return redirect()->route('chamados');
+                } else {
+                    // Se foi encontrado pedido retorna chamados
+                    // referentes ao pedido.
+                    $chamados = Chamado::where('pedido_id', $pedido->id)->latest()->paginate(5);
+                }
+
             }
-            // Faz a paginação da Collection
-            $chamados = new LengthAwarePaginator(
-                $chamados->slice(5),
-                $chamados->count(),
-                5,
-                null,
-                ['path' => url('chamados')]
-            );
         }
 
         return view('chamados.index', compact('chamados'));
@@ -93,8 +103,6 @@ class ChamadosController extends Controller
      */
     public function create($pedidoId)
     {
-        //TODO: model bidding?
-
         $pedido = Pedido::findOrFail($pedidoId);
 
         return view('chamados.create', compact('pedido'));
