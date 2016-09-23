@@ -1,4 +1,4 @@
-<section>
+<div>
     {!! Form::open(['url' => 'chamados']) !!}
     <div class="form-group col-lg-3">
         {!! Form::label('pedido', 'Pedido:') !!}
@@ -11,5 +11,6 @@
     <div class="form-group col-lg-1 button-aligned">
         {!! Form::submit('Filtrar', ['class' => 'btn btn-primary form-control']) !!}
     </div>
+    <div class="clearfix"></div>
     {!! Form::close() !!}
-</section>
+</div>

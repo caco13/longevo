@@ -5,7 +5,7 @@
     <hr>
     @include('partials.filter')
 
-    <section>
+    <div>
         @if($chamados->isEmpty())
             <p>A lista de chamados está vazia.</p>
         @else
@@ -28,7 +28,7 @@
                 </tbody>
             </table>
         @endif
-    </section>
+    </div>
 
     <div>
         <a href="{{ url('pedidos/buscar') }}" class="btn btn-primary">Novo Chamado</a>
