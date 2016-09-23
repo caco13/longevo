@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ChamadoTableSeeder extends Seeder
+class ChamadosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
