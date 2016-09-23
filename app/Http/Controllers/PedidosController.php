@@ -20,8 +20,8 @@ class PedidosController extends Controller
 
         $pedido = Pedido::find($pedidoId);
 
-        if( !$pedido ) {
-            //TODO: flash message
+        if (!$pedido) {
+            session()->flash('flash_message', 'Pedido não encontrado.');
 
             return redirect()->route('pedidos_buscar');
         }
