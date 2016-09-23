@@ -74,16 +74,44 @@ class ChamadosController extends Controller
     /**
      * Apresenta o formulário para cadastro de novo chamado.
      *
+     * @param $pedidoId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create($pedidoId)
     {
-        return view('chamados.create');
+        //TODO: model biding?
+
+        $pedido = Pedido::findOrFail($pedidoId);
+
+        return view('chamados.create', compact('pedido'));
     }
 
+    /**
+     * Salva dados do chamado.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
-        $pedido = $request->get('pedido');
+        $pedidoId = $request->get('pedido');
 
+        $pedido = Pedido::findOrFail($pedidoId);
+
+        $chamado = new Chamado;
+        $chamado->pedido_id = $pedido->id;
+        $chamado->titulo = $request->get('titulo');
+        $chamado->observacao = $request->get('observacao');
+
+        $chamado->save();
+
+        $cliente = $pedido->cliente;
+        $cliente->nome = $request->get('nome');
+        $cliente->email = $request->get('email');
+
+        // O Laravel só irá atualizar a tabela se houver modificações em algum campo
+        $cliente->save();
+
+        return redirect()->route('chamados');
     }
 }
