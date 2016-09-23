@@ -20,8 +20,18 @@ $factory->define(App\Cliente::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Pedido::class, function () {
     return [
-        'cliente_id' => function() {
-        return factory(App\Cliente::class)->create()->id;
+        'cliente_id' => function () {
+            return factory(App\Cliente::class)->create()->id;
+        }
+    ];
+});
+
+$factory->define(App\Chamado::class, function (Faker\Generator $faker) {
+    return [
+        'titulo' => $faker->sentence,
+        'observacao' => $faker->text,
+        'pedido_id' => function () {
+            return factory(App\Pedido::class)->create()->id;
         }
     ];
 });
