@@ -5,18 +5,19 @@
     <hr>
     @include('partials.filter')
 
-    @if($chamados->isEmpty())
-        <p>A lista de chamados está vazia.</p>
-    @else
-        <table class="table">
-            <thead>
+    <section>
+        @if($chamados->isEmpty())
+            <p>A lista de chamados está vazia.</p>
+        @else
+            <table class="table">
+                <thead>
                 <tr>
                     <th>Chamado</th>
                     <th>Pedido</th>
                     <th>Cliente</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach($chamados as $chamado)
                     <tr>
                         <td>{{ $chamado->id }}</td>
@@ -24,15 +25,15 @@
                         <td>{{ $chamado->pedido->cliente->nome }}</td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
-    @endif
+                </tbody>
+            </table>
+        @endif
+    </section>
 
-    <div>
-        {{ $chamados->links() }}
-    </div>
     <div>
         <a href="{{ url('pedidos/buscar') }}" class="btn btn-primary">Novo Chamado</a>
+        <span class="pull-right">
+            {{ $chamados->links() }}
+        </span>
     </div>
-
 @endsection
