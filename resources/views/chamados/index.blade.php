@@ -28,6 +28,11 @@
         </table>
     @endif
 
-    <a href="{{ url('pedidos/buscar') }}" class="btn btn-primary">Novo Chamado</a>
+    <div>
+        {{ $chamados->links() }}
+    </div>
+    <div>
+        <a href="{{ url('pedidos/buscar') }}" class="btn btn-primary">Novo Chamado</a>
+    </div>
 
 @endsection

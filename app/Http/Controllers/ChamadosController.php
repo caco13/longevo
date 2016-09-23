@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class ChamadosController extends Controller
 {
@@ -19,7 +21,7 @@ class ChamadosController extends Controller
      */
     public function index()
     {
-        $chamados = Chamado::latest('updated_at')->get();
+        $chamados = Chamado::latest('updated_at')->paginate(5);
 
         return view('chamados.index', compact('chamados'));
     }
@@ -48,7 +50,7 @@ class ChamadosController extends Controller
 
         //TODO: que feio, refatorar!
         if ($request->has('pedido')) {
-            $chamados = Chamado::where('pedido_id', $request->get('pedido'))->get();
+            $chamados = Chamado::where('pedido_id', $request->get('pedido'))->paginate(5);
         }
         if ($request->has('email')) {
             $cliente = Cliente::where('email', $request->get('email'))->first();
@@ -60,11 +62,20 @@ class ChamadosController extends Controller
                     }
                 }
             }
+
+            // Faz a paginação da Collection
+            $chamados = new LengthAwarePaginator(
+                $chamados->slice(5),
+                $chamados->count(),
+                5,
+                null,
+                ['path' => url('chamados')]
+            );
+
         }
 
         if ($chamados->isEmpty()) {
             session()->flash('flash_message', 'Não foram encontrados chamados com os filtros especificados.');
-
             return redirect()->route('chamados');
         }
 
