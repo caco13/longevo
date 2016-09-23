@@ -11,11 +11,17 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Cliente::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'nome' => $faker->name,
         'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Pedido::class, function () {
+    return [
+        'cliente_id' => function() {
+        return factory(App\Cliente::class)->create()->id;
+        }
     ];
 });
