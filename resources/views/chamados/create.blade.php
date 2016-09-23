@@ -25,8 +25,11 @@
             {!! Form::label('observacao', 'Observação:') !!}
             {!! Form::textarea('observacao', null, ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group">
+        <div class="form-group col-lg-offset-10 col-lg-1">
             {!! Form::submit('Salvar', ['class' => 'btn btn-primary form-control']) !!}
+        </div>
+        <div class="form-group col-lg-1">
+            {!! Html::link('pedidos/buscar', 'Cancelar', ['class' => 'btn btn-default']) !!}
         </div>
     {!! Form::close() !!}
 @endsection
