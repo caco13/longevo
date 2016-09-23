@@ -85,15 +85,5 @@ class ChamadosController extends Controller
     {
         $pedido = $request->get('pedido');
 
-        $result = Pedido::first($pedido->id);
-
-        if( !$result ) {
-            //TODO: flash message
-
-            return redirect()->route('chamados_create');
-        }
-
-
-
     }
 }

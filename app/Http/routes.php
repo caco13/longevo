@@ -15,10 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/**
+ * Rotas para os chamados
+ */
 Route::get('chamados', ['as' => 'chamados', 'uses' => 'ChamadosController@index']);
 
 Route::post('chamados', ['as' => 'filter', 'uses' => 'ChamadosController@filter']);
 
-Route::get('chamados/create', ['as' => 'chamados_create', 'uses' => 'ChamadosController@create']);
+Route::get('chamados/{pedidos}/create', ['as' => 'chamados_create', 'uses' => 'ChamadosController@create']);
 
 Route::get('chamados/{chamados}', 'ChamadosController@show');
+
+/**
+ * Rotas para os pedidos
+ */
+Route::get('pedidos/buscar', ['as' => 'pedidos_buscar', 'uses' => 'PedidosController@search']);
+
+Route::post('pedidos/encontrar', ['as' => 'pedidos_encontrar', 'uses' => 'PedidosController@find']);
