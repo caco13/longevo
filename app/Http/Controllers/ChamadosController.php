@@ -63,7 +63,7 @@ class ChamadosController extends Controller
         }
 
         if ($chamados->isEmpty()) {
-            //TODO: flash message
+            session()->flash('flash_message', 'Não foram encontrados chamados com os filtros especificados.');
 
             return redirect()->route('chamados');
         }
@@ -79,7 +79,7 @@ class ChamadosController extends Controller
      */
     public function create($pedidoId)
     {
-        //TODO: model biding?
+        //TODO: model bidding?
 
         $pedido = Pedido::findOrFail($pedidoId);
 
@@ -111,6 +111,8 @@ class ChamadosController extends Controller
 
         // O Laravel só irá atualizar a tabela se houver modificações em algum campo
         $cliente->save();
+
+        session()->flash('flash_message', 'Chamado criado com sucesso');
 
         return redirect()->route('chamados');
     }
