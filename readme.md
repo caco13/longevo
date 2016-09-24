@@ -13,9 +13,9 @@ Criar banco de dados PostgreSQL
 
 ## Instalação
 
-. Clonar repositório
+1. Clonar repositório
 
-1. Criar arquivo .env
+2. Criar arquivo .env
 
 - Em sistemas Unix-like executar (no diretório raiz do projeto):
 $ cp .env.example .env
@@ -27,7 +27,7 @@ DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
 
-2. Permitir acesso dos diretórios de escrita pelo servidor
+3. Permitir acesso dos diretórios de escrita pelo servidor
 
 Em sistemas Unix-like executar (no diretório raiz do projeto):
 
@@ -35,13 +35,13 @@ Em sistemas Unix-like executar (no diretório raiz do projeto):
 
 \# chmod -R ug+rwx storage bootstrap/cache
 
-3. Rodar <i>migragions</i>
+4. Rodar <i>migragions</i>
 
 Dentro do diretório do projeto executar:
 
 $ php artisan migrate
 
-4. Rodar <i>seeder</i>
+5. Rodar <i>seeder</i>
 
 Dentro do diretório do projeto executar:
 
