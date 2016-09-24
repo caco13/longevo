@@ -32,8 +32,10 @@
 
     <div>
         <a href="{{ url('pedidos/buscar') }}" class="btn btn-primary">Novo Chamado</a>
-        <span class="pull-right">
-            {{ $chamados->links() }}
-        </span>
+        @if ($paginate)
+            <span class="pull-right">
+                {{ $chamados->links() }}
+            </span>
+        @endif
     </div>
 @endsection

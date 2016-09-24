@@ -22,8 +22,9 @@ class ChamadosController extends Controller
     public function index()
     {
         $chamados = Chamado::latest('updated_at')->paginate(5);
+        $paginate = true;
 
-        return view('chamados.index', compact('chamados'));
+        return view('chamados.index', compact('chamados', 'paginate'));
     }
 
     /**
@@ -46,7 +47,11 @@ class ChamadosController extends Controller
      */
     public function filter(Request $request)
     {
-        $pedido = Pedido::find($request->get('pedido'));
+        if (is_numeric($request->get('pedido'))) {
+            $pedido = Pedido::find($request->get('pedido'));
+        } else {
+            $pedido = null;
+        }
         $cliente = Cliente::where('email', $request->get('email'))->first();
 
         if (is_null($cliente)) {
@@ -54,7 +59,7 @@ class ChamadosController extends Controller
                 session()->flash('flash_message', 'Não foram encontrados chamados com os filtros especificados.');
                 return redirect()->route('chamados');
             } else {
-                $chamados = Chamado::where('pedido_id', $pedido->id)->latest()->paginate(5);
+                $chamados = Chamado::where('pedido_id', $pedido->id)->latest()->get();
             }
         } else {
             $chamados = new Collection;
@@ -66,15 +71,6 @@ class ChamadosController extends Controller
                         $chamados->push($chamado);
                     }
                 }
-                // Faz a paginação da Collection
-                $chamados = new LengthAwarePaginator(
-                    $chamados->slice(5),
-                    $chamados->count(),
-                    5,
-                    null,
-                    ['path' => url('chamados')]
-                );
-
                 session()->flash('flash_message', 'Retornando chamados do cliente ' . $cliente->email);
             } else {
                 // Verifica se o cliente possui o pedido
@@ -85,13 +81,15 @@ class ChamadosController extends Controller
                 } else {
                     // Se foi encontrado pedido retorna chamados
                     // referentes ao pedido.
-                    $chamados = Chamado::where('pedido_id', $pedido->id)->latest()->paginate(5);
+                    $chamados = Chamado::where('pedido_id', $pedido->id)->latest()->get();
                 }
 
             }
         }
 
-        return view('chamados.index', compact('chamados'));
+        // Na tela de resultados filtrados não faz paginação
+        $paginate = false;
+        return view('chamados.index', compact('chamados', 'paginate'));
 
     }
 
