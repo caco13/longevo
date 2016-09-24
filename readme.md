@@ -3,21 +3,16 @@
 ## Configurações externas
 
 1. Servidor web
-
 Diretório público:
 
     {dir_laravel}/public
-
 2. Banco de dados
 
 Criar banco de dados PostgreSQL
 
 ## Instalação
-
 1. Clonar repositório
-
 2. Criar arquivo `.env`
-
 - Em sistemas Unix-like executar (no diretório raiz do projeto):
 
       $ cp .env.example .env
@@ -29,13 +24,12 @@ Criar banco de dados PostgreSQL
       DB_HOST=127.0.0.1
       
       DB_PORT=5432
-      
+        
       DB_DATABASE=
       
       DB_USERNAME=
       
       DB_PASSWORD=
-
 3. Permitir acesso dos diretórios de escrita pelo servidor
 
 Em sistemas Unix-like executar (no diretório raiz do projeto):
