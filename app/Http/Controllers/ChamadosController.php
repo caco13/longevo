@@ -90,7 +90,8 @@ class ChamadosController extends Controller
      */
     public function edit(Chamado $chamado)
     {
-        return view('chamados.edit', compact('chamado'));
+        $pedido = $chamado->pedido;
+        return view('chamados.edit', compact('chamado', 'pedido'));
     }
 
     /**
@@ -98,9 +99,25 @@ class ChamadosController extends Controller
      *
      * @param Request $request
      * @param Chamado $chamado
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Chamado $chamado)
     {
+        $pedido = Pedido::findOrFail($request->get('pedido'));
+        if ($pedido->id != $chamado->pedido->id) {
+            // Está tentando modificar número do pedido no chamado
+            // TODO: Gerar excessão
+            dd(); //por enquanto
+        }
+
+        $cliente = $chamado->pedido->cliente;
+        $cliente->nome = $request->get('nome');
+        $cliente->email = $request->get('email');
+        $cliente->save();
+
+        $chamado->save();
+
+        return redirect('chamados');
 
     }
 

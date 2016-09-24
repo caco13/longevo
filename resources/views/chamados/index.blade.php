@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <h1>Chamados</h1>
+    <a href="{{ url('chamados') }}" class="href"><h1>Chamados</h1></a>
     <hr>
     @include('partials.filter')
 

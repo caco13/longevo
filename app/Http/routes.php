@@ -24,6 +24,8 @@ Route::get('chamados/{chamados}', 'ChamadosController@show');
 
 Route::get('chamados/{chamados}/edit', 'ChamadosController@edit');
 
+Route::patch('chamados/{chamados}', 'ChamadosController@update');
+
 Route::post('chamados', ['as' => 'filter', 'uses' => 'ChamadosController@filter']);
 
 Route::get('chamados/{pedidos}/create', ['as' => 'chamados_create', 'uses' => 'ChamadosController@create']);
