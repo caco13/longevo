@@ -20,16 +20,16 @@ Criar banco de dados PostgreSQL
 
 - Em sistemas Unix-like executar (no diretório raiz do projeto):
 
-      $ cp .env.example .env
+       $ cp .env.example .env
 
 - Abrir arquivo `.env` e editar dados de acesso ao banco de dados PostgreSQL:
 
-      DB_CONNECTION=pgsql
-      DB_HOST=127.0.0.1
-      DB_PORT=5432
-      DB_DATABASE=
-      DB_USERNAME=
-      DB_PASSWORD=
+       DB_CONNECTION=pgsql
+       DB_HOST=127.0.0.1
+       DB_PORT=5432
+       DB_DATABASE=
+       DB_USERNAME=
+       DB_PASSWORD=
 
 3. Permitir acesso dos diretórios de escrita pelo servidor
 
