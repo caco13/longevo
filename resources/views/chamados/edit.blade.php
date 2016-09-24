@@ -8,6 +8,5 @@
         @include('chamados.form', ['botaoSubmeter' => 'Atualizar'])
     {!! Form::close() !!}
 
-    {{--TODO: errors.list--}}
-    {{--@include('errors.list')--}}
-@endsection
+    @include('errors.list')
+@stop

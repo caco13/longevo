@@ -9,7 +9,7 @@
         @if($chamados->isEmpty())
             <p>A lista de chamados está vazia.</p>
         @else
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>Chamado</th>
@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                 @foreach($chamados as $chamado)
-                    <tr>
+                    <tr class="clickable-row" data-href="/chamados/{{ $chamado->id }}">
                         <td>{{ $chamado->id }}</td>
                         <td>{{ $chamado->pedido->id }}</td>
                         <td>{{ $chamado->pedido->cliente->nome }}</td>
@@ -38,4 +38,13 @@
             </span>
         @endif
     </div>
-@endsection
+    @section('footer')
+        <script>
+            $(document).ready(function($) {
+                $(".clickable-row").click(function() {
+                    window.location = $(this).data("href");
+                });
+            });
+        </script>
+    @stop
+@stop

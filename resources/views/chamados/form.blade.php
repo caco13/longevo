@@ -1,17 +1,17 @@
 <div class="form-group">
-    {!! Form::label('pedido', 'Número do pedido:') !!}
+    {!! Form::label('pedido', 'Número do pedido: *') !!}
     {!! Form::text('pedido', $pedido->id, ['class' => 'form-control', 'readonly' => 'readonly']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('nome', 'Nome do cliente:') !!}
+    {!! Form::label('nome', 'Nome do cliente: *') !!}
     {!! Form::text('nome', $pedido->cliente->nome, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('email', 'E-mail:') !!}
+    {!! Form::label('email', 'E-mail: *') !!}
     {!! Form::text('email', $pedido->cliente->email, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('titulo', 'Título:') !!}
+    {!! Form::label('titulo', 'Título: *') !!}
     {!! Form::text('titulo', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
@@ -24,3 +24,4 @@
 <div class="form-group col-lg-1">
     {!! Html::link('chamados', 'Cancelar', ['class' => 'btn btn-default']) !!}
 </div>
+<div class="clearfix"></div>

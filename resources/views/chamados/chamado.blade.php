@@ -37,8 +37,11 @@
         </tbody>
     </table>
 
-    <div>
+    <div class="col-lg-1">
         {{Html::link(url('chamados/' . $chamado->id . '/edit'), 'Atualizar', ['class' => 'btn btn-primary'])}}
     </div>
-
-@endsection
+    <div class="col-lg-2">
+        {!! Html::link('chamados', 'Cancelar', ['class' => 'btn btn-default']) !!}
+    </div>
+    <div class="clearfix"></div>
+@stop

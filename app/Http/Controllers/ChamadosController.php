@@ -8,10 +8,6 @@ use App\Pedido;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
-
 class ChamadosController extends Controller
 {
     /**
@@ -59,6 +55,8 @@ class ChamadosController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateRequestChamado($request);
+
         $pedidoId = $request->get('pedido');
 
         $pedido = Pedido::findOrFail($pedidoId);
@@ -103,6 +101,8 @@ class ChamadosController extends Controller
      */
     public function update(Request $request, Chamado $chamado)
     {
+        $this->validateRequestChamado($request);
+
         $pedido = Pedido::findOrFail($request->get('pedido'));
         if ($pedido->id != $chamado->pedido->id) {
             // Está tentando modificar número do pedido no chamado
@@ -174,6 +174,18 @@ class ChamadosController extends Controller
         $paginate = false;
         return view('chamados.index', compact('chamados', 'paginate'));
 
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function validateRequestChamado(Request $request)
+    {
+        $this->validate($request, [
+            'nome' => 'required|min:2',
+            'email' => 'required|email',
+            'titulo' => 'required|min:5'
+        ]);
     }
 
 }
