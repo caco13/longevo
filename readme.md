@@ -12,7 +12,9 @@ Criar banco de dados PostgreSQL
 
 ## Instalação
 1. Clonar repositório
+
 2. Criar arquivo `.env`
+
 - Em sistemas Unix-like executar (no diretório raiz do projeto):
 
       $ cp .env.example .env
