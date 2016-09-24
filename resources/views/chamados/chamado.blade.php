@@ -38,7 +38,7 @@
     </table>
 
     <div>
-        {{Html::link(url('chamados/edit'), 'Atualizar', ['class' => 'btn btn-primary'])}}
+        {{Html::link(url('chamados/edit' . $chamado->id), 'Atualizar', ['class' => 'btn btn-primary'])}}
     </div>
 
 @endsection
