@@ -40,6 +40,10 @@ Em sistemas Unix-like executar (no diretório raiz do projeto):
 
     # find storage bootstrap/cache -type d -exec chmod ug+rw {} +
 
+4. Baixar/atualizar pacotes da aplicação
+
+    $ composer update
+
 4. Rodar <i>migragions</i>
 
 Dentro do diretório do projeto executar:
