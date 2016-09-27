@@ -46,7 +46,7 @@ Em sistemas Unix-like executar (no diretório raiz do projeto):
 
 5. Gerar chave da aplicação (no diretório do projeto).
 
-    \$ php artisan key:generate
+    $ php artisan key:generate
 
 4. Rodar <i>migragions</i> (no diretório do projeto).
 
