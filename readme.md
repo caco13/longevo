@@ -38,7 +38,7 @@ Em sistemas Unix-like executar (no diretório raiz do projeto):
 
     # chgrp -R www-data storage bootstrap/cache
 
-    # chmod -R ug+rwx storage bootstrap/cache
+    # find storage bootstrap/cache -type d -exec chmod ug+rw {} +
 
 4. Rodar <i>migragions</i>
 
