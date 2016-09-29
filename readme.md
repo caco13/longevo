@@ -3,9 +3,12 @@
 ## Configurações externas
 
 1. Servidor web
+
 Diretório público:
 
+
     {dir_laravel}/public
+
 2. Banco de dados
 
 Criar banco de dados PostgreSQL
@@ -17,21 +20,19 @@ Criar banco de dados PostgreSQL
 
 - Em sistemas Unix-like executar (no diretório raiz do projeto):
 
-      $ cp .env.example .env
+
+    $ cp .env.example .env
 
 - Abrir arquivo `.env` e editar dados de acesso ao banco de dados PostgreSQL:
 
-      DB_CONNECTION=pgsql
+
+    DB_CONNECTION=pgsql
+    DB_HOST=127.0.0.1
+    DB_PORT=5432
+    DB_DATABASE=
+    DB_USERNAME=
+    DB_PASSWORD=
       
-      DB_HOST=127.0.0.1
-      
-      DB_PORT=5432
-        
-      DB_DATABASE=
-      
-      DB_USERNAME=
-      
-      DB_PASSWORD=
 3. Permitir acesso dos diretórios de escrita pelo servidor
 
 Em sistemas Unix-like executar (no diretório raiz do projeto):
@@ -42,17 +43,21 @@ Em sistemas Unix-like executar (no diretório raiz do projeto):
 
 4. Baixar/atualizar pacotes da aplicação (no diretório do projeto).
 
+
     $ composer update
 
 5. Gerar chave da aplicação (no diretório do projeto).
+
 
     $ php artisan key:generate
 
 4. Rodar <i>migragions</i> (no diretório do projeto).
 
+
     $ php artisan migrate
 
 5. Rodar <i>seeder</i> (no diretório do projeto).
+
 
     $ php artisan db:seed
 
