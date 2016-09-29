@@ -38,3 +38,8 @@ Route::post('chamados/store', ['as' => 'chamados_store', 'uses' => 'ChamadosCont
 Route::get('pedidos/buscar', ['as' => 'pedidos_buscar', 'uses' => 'PedidosController@search']);
 
 Route::post('pedidos/encontrar', ['as' => 'pedidos_encontrar', 'uses' => 'PedidosController@find']);
+
+/**
+ * Rota para busca ajax
+ */
+Route::get('buscaajax/{value}', ['as' => 'buscaajax', 'uses' => 'AutocompleteController@search']);
