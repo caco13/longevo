@@ -38,18 +38,22 @@ Em sistemas Unix-like executar (no diretório raiz do projeto):
 
     # chgrp -R www-data storage bootstrap/cache
 
-    # chmod -R ug+rwx storage bootstrap/cache
+    # find storage bootstrap/cache -type d -exec chmod ug+rw {} +
 
-4. Rodar <i>migragions</i>
+4. Baixar/atualizar pacotes da aplicação (no diretório do projeto).
 
-Dentro do diretório do projeto executar:
+    $ composer update
+
+5. Gerar chave da aplicação (no diretório do projeto).
+
+    $ php artisan key:generate
+
+4. Rodar <i>migragions</i> (no diretório do projeto).
 
     $ php artisan migrate
 
-5. Rodar <i>seeder</i>
-
-Dentro do diretório do projeto executar:
+5. Rodar <i>seeder</i> (no diretório do projeto).
 
     $ php artisan db:seed
 
-Obs: este comando ira inserir a massa de dados nas tabelas do banco de dados.
+Obs: este comando irá inserir a massa de dados nas tabelas do banco de dados.
