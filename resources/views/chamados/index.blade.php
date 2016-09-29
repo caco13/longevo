@@ -40,9 +40,32 @@
     </div>
     @section('footer')
         <script>
+            // Clicar em uma linha da tabela para mostrar chamado
             $(document).ready(function($) {
                 $(".clickable-row").click(function() {
                     window.location = $(this).data("href");
+                });
+            });
+
+            // Ajax de busca com autocomplete
+            $(document).ready(function () {
+                var src = "{{ route('buscaajax') }}";
+                $("#search_text").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: src,
+                            dataType: "json",
+                            data: {
+                                term: request.term,
+                                model: $("#search_text").attr('data-model'),
+                                attribute: $("#search_text").attr('data-attribute')
+                            },
+                            success: function (data) {
+                                response(data);
+                            }
+                        });
+                    },
+                    minLength: 3
                 });
             });
         </script>

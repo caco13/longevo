@@ -18,16 +18,17 @@ class AutocompleteController extends Controller
         $attribute = $request->get('attribute');
 
         switch ($model) {
-            case 'cliente':
+            case 'Cliente':
                 $results = Cliente::where($attribute, 'LIKE', '%' . $term . '%')->get();
                 break;
-            case 'pedido':
+            case 'Pedido':
                 $results = Pedido::where($attribute, 'LIKE', '%' . $term . '%')->get();
                 break;
-            case 'chamado':
+            case 'Chamado':
                 $results = Chamado::where($attribute, 'LIKE', '%' . $term . '%')->get();
+                break;
             default:
-                //TODO: gera exceção
+                throw new \Exception('Model not found');
         }
 
         $data = [];

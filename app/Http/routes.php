@@ -42,4 +42,4 @@ Route::post('pedidos/encontrar', ['as' => 'pedidos_encontrar', 'uses' => 'Pedido
 /**
  * Rota para busca ajax
  */
-Route::get('buscaajax/{value}', ['as' => 'buscaajax', 'uses' => 'AutocompleteController@search']);
+Route::get('buscaajax', ['as' => 'buscaajax', 'uses' => 'AutocompleteController@search']);

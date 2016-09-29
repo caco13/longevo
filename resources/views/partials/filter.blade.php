@@ -6,7 +6,13 @@
     </div>
     <div class="form-group col-lg-3">
         {!! Form::label('email', 'Email:') !!}
-        {!! Form::text('email', null, ['class' => 'form-control']) !!}
+        {!! Form::text('email', null, [
+            'class' => 'form-control',
+            'id' => 'search_text',
+            'placeholder' => 'Buscar email',
+            'data-model' => 'Cliente',
+            'data-attribute' => 'email',
+        ]) !!}
     </div>
     <div class="form-group col-lg-1 button-aligned">
         {!! Form::submit('Filtrar', ['class' => 'btn btn-primary form-control']) !!}
